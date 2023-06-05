@@ -1,0 +1,53 @@
+ 
+/* Cartas para las localizaciones, o eso creo */
+.card-location {
+    width: 500px; /* Ancho automático para las cartas de localizaciones */
+    height: 100px; /* Altura automática para las cartas de localizaciones */
+    /* background-color: ; */
+    /* Color del borde del cuadrado de las cartas de localizaciones */
+    border: groove 5px gray;
+    /* Borde estilizado de 5px en color gris para las cartas de localizaciones */
+    margin: 1rem; /* Margen alrededor de las cartas de localizaciones */
+    display: flex; /* Uso de flexbox para el diseño de las cartas de localizaciones */
+    margin-right:20px;
+}
+
+.container-location-cards {
+    width: 70%; /* Ancho del contenedor de las cartas de localizaciones */
+    height: 100%; /* Altura del contenedor de las cartas de localizaciones */
+    display: flex; /* Uso de flexbox para el diseño del contenedor de las cartas de localizaciones */
+    justify-content: center; /* Centrar horizontalmente los elementos dentro del contenedor */
+    align-items: center; /* Centrar verticalmente los elementos dentro del contenedor */
+    flex-wrap: wrap; /* Permitir el ajuste de envoltura de los elementos hijos dentro del contenedor */
+    margin-left: 95px; /* Margen izquierdo del contenedor de las cartas de localizaciones */
+}
+
+.card-location > .description-location-card {
+    width: 100%; /* Ancho del contenedor de descripción dentro de las cartas de localizaciones */
+    height: 300px; /* Altura del contenedor de descripción dentro de las cartas de localizaciones */
+    margin-left: 5%; /* Margen izquierdo del contenedor de descripción dentro de las cartas de localizaciones */
+}
+
+.description-location-card > h2 {
+    text-align: center; /* ampliación del espacio de la derecha */
+    font-family: 'Delicious Handrawn'; /* Fuente para el título dentro del contenedor de descripción de localizaciones */
+    margin-top: 10px; /* Margen superior para el título dentro del contenedor de descripción de localizaciones */
+}
+
+h2.locations {
+    text-align: center; /* Alinear el texto al centro */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para los títulos con clase "locations" */
+    margin-top: 10px; /* Margen superior para los títulos con clase "locations" */
+}
+
+/* Lo siguiente hace referencia al h2 Locations */
+h2#locations {
+    margin-right: 5px;/* ampliar el espacio de la derecha*/
+    font-family: 'Delicious Handrawn', cursive;/* Fuente para el título con ID "characters" */
+    margin-top: 10px;/* Fuente para el título con ID "characters" */
+    color: black; /* Cambiar #FF0000 por el color deseado */
+    font-size: 3rem;/* Tamaño de fuente para el título con ID "characters" */
+    /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);*//*gris*/
+    text-shadow: 2px 2px 4px rgba(139, 250, 4, 0.5);/* Sombra de texto para el título con ID "characters" */
+}
+

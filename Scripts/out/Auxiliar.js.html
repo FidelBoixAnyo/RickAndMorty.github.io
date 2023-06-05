@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Auxiliar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Auxiliar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Valor del texto para referencia.
+ * @type {string}
+ */
+ var valoresBusqueda = "";
+
+ /**
+  * Número de página para consultas.
+  * @type {number}
+  */
+ var numPage = Math.floor((Math.random() * 42 + 1));
+ 
+ /**
+  * URL de la página de personajes.
+  * @const {string}
+  */
+ const URL = "https://rickandmortyapi.com/api/character?page=";
+ 
+ /**
+  * URL de la página de episodios.
+  * @const {string}
+  */
+ const URL2 = "https://rickandmortyapi.com/api/episode?page=";
+ 
+ /**
+  * URL de la página de localizaciones.
+  * @const {string}
+  */
+ const URL3 = "https://rickandmortyapi.com/api/location?page=";
+ 
+ /**
+  * Función para avanzar a la siguiente página.
+  */
+ function nextPage() {
+   if (numPage &lt; 42 &amp;&amp; numPage > 0) {
+     numPage++;
+     limpiar();
+     generateAllCharacters();
+   } else {
+     alert("No hay más páginas.");
+   }
+ }
+ 
+ /**
+  * Función para retroceder a la página anterior.
+  */
+ function prePage() {
+   if (numPage > 1) {
+     numPage--;
+     limpiar();
+     generateAllCharacters();
+   } else {
+     alert("Estás en la primera página.");
+   }
+ }
+ 
+ /**
+  * Función para limpiar la información en la página.
+  */
+ function limpiar() {
+   
+
+  document.getElementById("containerCards").innerHTML = "";
+ 
+  document.getElementById("containerEpisodesCards").innerHTML = "";
+ 
+  document.getElementById("containerLocationsCards").innerHTML = "";
+ 
+   document.getElementById("characters").innerHTML = "";
+   document.getElementById("episodes").innerHTML = "";
+   document.getElementById("locations").innerHTML = "";
+
+  document.getElementById(`containerCardsTable`).innerHTML="";  
+  document.getElementById(`containerEpisodesCards`).innerHTML="";  
+  document.getElementById(`containerLocationsCards`).innerHTML="";
+  
+  document.getElementById(`containerEpisodesCardsOff`).innerHTML="";
+
+  document.getElementById(`anyadido`).innerHTML="";
+
+  document.getElementById(`containerLocationsCardsOut`).innerHTML="";
+   
+ }
+ 
+ /**
+  * Función para buscar el texto introducido.
+  */
+ function search() {
+   /**
+    * Valor de búsqueda del texto introducido.
+    * @type {string}
+    */
+   valoresBusqueda = document.getElementById("txt-character").value;
+ 
+   limpiar();
+
+   document.getElementById(`XMLE`).style.visibility=`visible`;
+
+   
+   //Añadir la primera línea de characters
+   xml = '&lt;?xml version="1.0" encoding="UTF-8"?>\n';
+   xml += '&lt;characters>\n';
+ 
+   for (numPage = 1; numPage &lt;= 42; numPage++) {
+     let salida = "Characters:";
+     document.getElementById("characters").innerHTML = salida;
+ 
+     generateSearchCharacters();
+   }
+ 
+   for (numPage = 1; numPage &lt;= 3; numPage++) {
+     let salida = "Episodes:";
+     document.getElementById("episodes").innerHTML = salida;
+ 
+     generateSearchEpisodes();
+   }
+ 
+   for (numPage = 1; numPage &lt;= 7; numPage++) {
+     let salida = "Locations:";
+     document.getElementById("locations").innerHTML = salida;
+ 
+     generateSearchLocations();
+   }
+ }
+
+ /**
+  * Función para que salga a la derecha después de pulsar en un listado.
+  */
+ function searchBeforeList(){
+
+  document.getElementById(`XMLE`).style.visibility=`visible`;
+
+
+  for(numPage=1;numPage&lt;=42;numPage++){
+      let salida="Characters:";
+      document.getElementById("characters").innerHTML=salida;
+
+      generateSearchCharacters();
+  }
+
+  for(numPage=1;numPage&lt;=3;numPage++){
+      let salida="Episodes:";
+      document.getElementById("episodes").innerHTML=salida;
+
+      generateSearchEpisodes();
+  }
+  for(numPage=1;numPage&lt;=7;numPage++){
+      let salida="Locations:";
+      document.getElementById("locations").innerHTML=salida;
+
+      generateSearchLocations();
+  }
+}
+ 
+ /**
+  * Función para listar según la opción seleccionada en el select.
+  */
+ function listSelected() {
+   /**
+    * Valor de búsqueda seleccionado en el select.
+    * @type {string}
+    */
+   valoresBusqueda = document.getElementById("select").value;
+ 
+   limpiar();
+ 
+   if (valoresBusqueda === "Human" || valoresBusqueda === "Robot" || valoresBusqueda === "Animal" || valoresBusqueda === "Alien") {
+     for (numPage = 1; numPage &lt;= 42; numPage++) {
+       listTypeCharacter();
+     }
+   } else if (valoresBusqueda === "S01" || valoresBusqueda === "S02" || valoresBusqueda === "S03" || valoresBusqueda === "S04" || valoresBusqueda === "S05") {
+     for (numPage = 1; numPage &lt;= 3; numPage++) {
+       generateListedEpisodes();
+     }
+   } else {
+     for (numPage = 1; numPage &lt;= 7; numPage++) {
+       generateListedLocations();
+     }
+   }
+ }
+ 
+ /**
+  * Evento de carga para cambiar el color de fondo al refrescar la página.
+  */
+ window.addEventListener("load", function () {
+   /**
+    * Colores de fondo disponibles.
+    * @type {string[]}
+    */
+   var colors = ["#24325F99", "#526E2D99", "#917C5D99", "#545994", "#4d7666", "#deace2", "#e26bb6"];
+ 
+   /**
+    * Color de fondo aleatorio seleccionado.
+    * @type {string}
+    */
+   var randomColor = colors[Math.floor(Math.random() * colors.length)];
+ 
+   document.body.style.backgroundColor = randomColor;
+
+   document.getElementById(`XMLE`).style.visibility=`hidden`;
+ });
+ </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#URL">URL</a></li><li><a href="global.html#URL2">URL2</a></li><li><a href="global.html#URL3">URL3</a></li><li><a href="global.html#createCards">createCards</a></li><li><a href="global.html#createEpisodes">createEpisodes</a></li><li><a href="global.html#createListedCharacters">createListedCharacters</a></li><li><a href="global.html#createListedEpisodes">createListedEpisodes</a></li><li><a href="global.html#createListedLocations">createListedLocations</a></li><li><a href="global.html#createLocations">createLocations</a></li><li><a href="global.html#createSearchCards">createSearchCards</a></li><li><a href="global.html#displayImportedData">displayImportedData</a></li><li><a href="global.html#executeExport">executeExport</a></li><li><a href="global.html#exportXML">exportXML</a></li><li><a href="global.html#generateAllCharacters">generateAllCharacters</a></li><li><a href="global.html#generateListedEpisodes">generateListedEpisodes</a></li><li><a href="global.html#generateListedLocations">generateListedLocations</a></li><li><a href="global.html#generateSearchCharacters">generateSearchCharacters</a></li><li><a href="global.html#generateSearchEpisodes">generateSearchEpisodes</a></li><li><a href="global.html#generateSearchLocations">generateSearchLocations</a></li><li><a href="global.html#getApi">getApi</a></li><li><a href="global.html#importXML">importXML</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#listSelected">listSelected</a></li><li><a href="global.html#listTypeCharacter">listTypeCharacter</a></li><li><a href="global.html#nextPage">nextPage</a></li><li><a href="global.html#numPage">numPage</a></li><li><a href="global.html#prePage">prePage</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#searchBeforeList">searchBeforeList</a></li><li><a href="global.html#showEpisodeInfo">showEpisodeInfo</a></li><li><a href="global.html#showEpisodeListedInfo">showEpisodeListedInfo</a></li><li><a href="global.html#showInfo">showInfo</a></li><li><a href="global.html#showInfoOnList">showInfoOnList</a></li><li><a href="global.html#showListedLocationInfo">showListedLocationInfo</a></li><li><a href="global.html#showLocationInfo">showLocationInfo</a></li><li><a href="global.html#valoresBusqueda">valoresBusqueda</a></li><li><a href="global.html#xml">xml</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jun 04 2023 20:20:43 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

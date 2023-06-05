@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Locations.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Locations.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code> /**
+ * Genera las localizaciones que coincidan con la búsqueda y las muestra en la página.
+ */
+const generateSearchLocations = async () => {
+    const data = await getApi(URL3 + numPage);
+    data.map(locations => createLocations(locations, valoresBusqueda));
+  }
+  
+  /**
+   * Crea una tarjeta de localización para la búsqueda.
+   * @param {Object} locations - Los datos de la localización.
+   * @param {string} valoresBusqueda - El término de búsqueda.
+   */
+  const createLocations = (locations, valoresBusqueda) => {
+    let nombres = locations.name.split(" ");
+    document.getElementById("numPage").innerHTML = 1;
+  
+    if (locations.name == valoresBusqueda || nombres.includes(valoresBusqueda) || Number(locations.id) == Number(valoresBusqueda)) {
+      const card = document.createElement('div');
+      card.classList.add('card-location');
+  
+      const containerDescription = document.createElement('div');
+      containerDescription.classList.add('description-location-card');
+  
+      const nameLocation = document.createElement('input');
+      nameLocation.type="button";
+      nameLocation.className="fakeh2";
+      nameLocation.value=locations.name;
+      nameLocation.onclick = function(){
+          showLocationInfo(locations.url);
+      };
+  
+      const typeLocation = document.createElement('p');
+      typeLocation.textContent = "Type: " + locations.type;
+  
+      const dimensionLocation = document.createElement('p');
+      dimensionLocation.textContent = "Dimension: " + locations.dimension;
+  
+      containerDescription.appendChild(nameLocation);
+      containerDescription.appendChild(typeLocation);
+      containerDescription.appendChild(dimensionLocation);
+  
+      card.appendChild(containerDescription);
+  
+      document.getElementById('containerLocationsCards').appendChild(card);
+    }
+  }
+  
+  /**
+   * Genera las localizaciones según la página actual y las muestra en la página.
+   */
+  const generateListedLocations = async () => {
+    const data = await getApi(URL3 + numPage);
+    data.map(locations => createListedLocations(locations));
+  }
+  
+  /**
+   * Crea una tarjeta de localización para la lista.
+   * @param {Object} locations - Los datos de la localización.
+   */
+  const createListedLocations = (locations) => {
+    document.getElementById("numPage").innerHTML = 1;
+  
+    const card = document.createElement('div');
+    card.classList.add('card-location');
+  
+    const containerDescription = document.createElement('div');
+    containerDescription.classList.add('description-location-card');
+  
+    const nameLocation = document.createElement('input');
+    nameLocation.type="button";
+    nameLocation.className="fakeh2";
+    nameLocation.value=locations.name;
+    nameLocation.onclick = function(){
+        showListedLocationInfo(locations.url);
+    };
+  
+    const typeLocation = document.createElement('p');
+    typeLocation.textContent = "Type: " + locations.type;
+  
+    const dimensionLocation = document.createElement('p');
+    dimensionLocation.textContent = "Dimension: " + locations.dimension;
+  
+    containerDescription.appendChild(nameLocation);
+    containerDescription.appendChild(typeLocation);
+    containerDescription.appendChild(dimensionLocation);
+  
+    card.appendChild(containerDescription);
+  
+    document.getElementById('containerLocationsCardsOut').appendChild(card);
+  }
+  
+  /**
+   * Saca la información de la localización cuando pulsemos sobre el nombre.
+   * @param {string} url - Url del episodio.
+   */
+  function showLocationInfo(url){
+    document.getElementById(`anyadido`).innerHTML="";
+
+    fetch(`${url}`)
+      .then(response => response.json())
+      .then(location => {
+          const breakLine=document.createElement(`br`);
+          
+          const nameLocation=document.createElement(`h2`);
+          nameLocation.textContent=location.name;
+
+          const idLocation=document.createElement(`p`);
+          idLocation.classList.add(`tableContent`);
+          idLocation.textContent=`Id: ${location.id}`;
+
+          const typeLocation=document.createElement(`p`);
+          typeLocation.classList.add(`tableContent`);
+          typeLocation.textContent=`Type: ${location.type}`;
+
+          const dimensionLocation=document.createElement(`p`);
+          dimensionLocation.classList.add(`tableContent`);
+          dimensionLocation.textContent=`Dimension: ${location.dimension}`;
+
+          const createdLocation=document.createElement(`p`);
+          createdLocation.classList.add(`tableContent`);
+          createdLocation.textContent=`Created: ${location.created}`;
+
+          const infoTable=document.createElement(`div`);
+          infoTable.classList.add(`resultadoTabla`);
+          infoTable.appendChild(nameLocation);
+          infoTable.appendChild(idLocation);
+          infoTable.appendChild(typeLocation);
+          infoTable.appendChild(dimensionLocation);
+          infoTable.appendChild(createdLocation);
+          infoTable.appendChild(breakLine);
+
+          const residentsTittle=document.createElement(`h3`);
+          residentsTittle.classList.add(`selectorh3`);
+          residentsTittle.textContent=`Residents`;
+
+          infoTable.appendChild(residentsTittle);
+
+          for(let i=0;i&lt;location.residents.length;i++){
+              fetch(`${location.residents[i]}`)
+              .then(response => response.json())
+              .then(character => {
+                  let characterName=document.createElement(`p`);
+                  characterName.classList.add(`tableContent`);
+                  characterName.textContent=`${character.name}`;
+                  infoTable.appendChild(characterName);
+              });
+          }            
+
+          document.getElementById(`anyadido`).appendChild(infoTable);
+      });
+  }
+
+  /**
+   * Saca la información de la localización cuando pulsemos sobre el nombre en un listado.
+   * @param {string} url - Url del episodio.
+   */
+  function showListedLocationInfo(url){
+    limpiar();
+
+      fetch(`${url}`)
+      .then(response => response.json())
+      .then(location => {
+        valoresBusqueda=location.name;
+        searchBeforeList();
+
+          const breakLine=document.createElement(`br`);
+          
+          const nameLocation=document.createElement(`h2`);
+          nameLocation.textContent=location.name;
+
+          const idLocation=document.createElement(`p`);
+          idLocation.classList.add(`tableContent`);
+          idLocation.textContent=`Id: ${location.id}`;
+
+          const typeLocation=document.createElement(`p`);
+          typeLocation.classList.add(`tableContent`);
+          typeLocation.textContent=`Type: ${location.type}`;
+
+          const dimensionLocation=document.createElement(`p`);
+          dimensionLocation.classList.add(`tableContent`);
+          dimensionLocation.textContent=`Dimension: ${location.dimension}`;
+
+          const createdLocation=document.createElement(`p`);
+          createdLocation.classList.add(`tableContent`);
+          createdLocation.textContent=`Created: ${location.created}`;
+
+          const infoTable=document.createElement(`div`);
+          infoTable.classList.add(`resultadoTabla`);
+          infoTable.appendChild(nameLocation);
+          infoTable.appendChild(idLocation);
+          infoTable.appendChild(typeLocation);
+          infoTable.appendChild(dimensionLocation);
+          infoTable.appendChild(createdLocation);
+          infoTable.appendChild(breakLine);
+
+          const residentsTittle=document.createElement(`h3`);
+          residentsTittle.classList.add(`selectorh3`);
+          residentsTittle.textContent=`Residents`;
+
+          infoTable.appendChild(residentsTittle);
+
+          for(let i=0;i&lt;location.residents.length;i++){
+              fetch(`${location.residents[i]}`)
+              .then(response => response.json())
+              .then(character => {
+                  let characterName=document.createElement(`p`);
+                  characterName.classList.add(`tableContent`);
+                  characterName.textContent=`${character.name}`;
+                  infoTable.appendChild(characterName);
+              });
+          }            
+
+          document.getElementById(`anyadido`).appendChild(infoTable);
+      });
+  }</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#URL">URL</a></li><li><a href="global.html#URL2">URL2</a></li><li><a href="global.html#URL3">URL3</a></li><li><a href="global.html#createCards">createCards</a></li><li><a href="global.html#createEpisodes">createEpisodes</a></li><li><a href="global.html#createListedCharacters">createListedCharacters</a></li><li><a href="global.html#createListedEpisodes">createListedEpisodes</a></li><li><a href="global.html#createListedLocations">createListedLocations</a></li><li><a href="global.html#createLocations">createLocations</a></li><li><a href="global.html#createSearchCards">createSearchCards</a></li><li><a href="global.html#displayImportedData">displayImportedData</a></li><li><a href="global.html#executeExport">executeExport</a></li><li><a href="global.html#exportXML">exportXML</a></li><li><a href="global.html#generateAllCharacters">generateAllCharacters</a></li><li><a href="global.html#generateListedEpisodes">generateListedEpisodes</a></li><li><a href="global.html#generateListedLocations">generateListedLocations</a></li><li><a href="global.html#generateSearchCharacters">generateSearchCharacters</a></li><li><a href="global.html#generateSearchEpisodes">generateSearchEpisodes</a></li><li><a href="global.html#generateSearchLocations">generateSearchLocations</a></li><li><a href="global.html#getApi">getApi</a></li><li><a href="global.html#importXML">importXML</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#listSelected">listSelected</a></li><li><a href="global.html#listTypeCharacter">listTypeCharacter</a></li><li><a href="global.html#nextPage">nextPage</a></li><li><a href="global.html#numPage">numPage</a></li><li><a href="global.html#prePage">prePage</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#searchBeforeList">searchBeforeList</a></li><li><a href="global.html#showEpisodeInfo">showEpisodeInfo</a></li><li><a href="global.html#showEpisodeListedInfo">showEpisodeListedInfo</a></li><li><a href="global.html#showInfo">showInfo</a></li><li><a href="global.html#showInfoOnList">showInfoOnList</a></li><li><a href="global.html#showListedLocationInfo">showListedLocationInfo</a></li><li><a href="global.html#showLocationInfo">showLocationInfo</a></li><li><a href="global.html#valoresBusqueda">valoresBusqueda</a></li><li><a href="global.html#xml">xml</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jun 04 2023 20:20:43 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

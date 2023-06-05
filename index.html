@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- HTML -->
+<html lang="en">
+    <head>
+        <title>Rick & Morty Prototype</title>
+        <link rel="stylesheet" href="./CSS/Main.css">
+        <link rel="stylesheet" href="./CSS/CharacterCard.css">
+        <link rel="stylesheet" href="./CSS/EpisodeCard.css">
+        <link rel="stylesheet" href="./CSS/LocationsCard.css">
+        <script src="./Scripts/Auxiliar.js"></script>
+        <script src="./Scripts/CharacterCard.js"></script>
+        <script src="./Scripts/EpisodeCard.js"></script>
+        <script src="./Scripts/Locations.js"></script>
+        <script src="./Scripts/XML.js"></script>
+        <link rel="website icon" type="png" href="./Rick2.png">
+    </head>
+    <body>
+        <header></header>
+        <main>
+            <h1>Rick & Morty API 2.0</h1><!-- Título principal de la página -->
+            <br>
+            <table>
+                <tr>
+                <td>
+                    <td><input type="button" id="XMLE" class="XMLE" value="Export" onclick="executeExport()"></td> <!-- Botón con valor "Export", clase "" y función onclick executeExport() -->
+                </td>
+                <td>
+                <input id="txt-character" class="finder-character" type="text" placeholder="Type your character"><!-- Entrada de texto para escribir el personaje -->
+                </td>
+                <td>
+                    <td><input type="file" class="XMLIF" id="importFile" accept=".xml"> <!-- Input de tipo file con id "importFile" que acepta archivos .xml -->
+                    <td><input type="button" class="XMLI" value="Import" onclick="importXML()"></td> <!-- Botón con valor "Import", clase "" y función onclick importXML() -->
+                </td>
+                </tr>
+        
+        </table>
+            <br>
+            <table>
+              <!-- Posible cambio: ponerle categorías para que se vea en la pantalla -->
+              <tr><td><select id="select">
+                <optgroup label="Characters"><!-- Grupo de opciones para personajes -->
+                    <option value="Human">Human</option><!-- Opción de personaje humano -->
+                    <option value="Robot">Robot</option><!-- Opción de personaje robot -->
+                    <option value="Animal">Animal</option><!-- Opción de personaje animal -->
+                    <option value="Alien">Alien</option><!-- Opción de personaje alienígena -->
+                </optgroup>
+                <optgroup label="Episodes"><!-- Grupo de opciones para episodios -->
+                    <option value="S01">S01</option><!-- Opción de episodio S01 -->
+                    <option value="S02">S02</option><!-- Opción de episodio S02 -->
+                    <option value="S03">S03</option><!-- Opción de episodio S03 -->
+                    <option value="S04">S04</option><!-- Opción de episodio S04 -->
+                    <option value="S05">S05</option><!-- Opción de episodio S05 -->
+                </optgroup>
+                <option id="Localizaciones">Localizaciones</option><!-- Opción de localizaciones -->
+            </select></td> <!-- Fin del elemento select -->
+            <td><input type="button" value="Next Page" class="restpage" onclick="nextPage()"></td> <!-- Botón "Next Page" con clase restpage y función onclick nextPage() -->
+            <label class="txt">Num Page: </label> <!-- Etiqueta de texto "Num Page:" con clase txt -->
+            <label id="numPage">0</label> <!-- Etiqueta de texto con id numPage y valor inicial "0" -->
+            <td><input type="button" value="Rest Page" class="nextpage" onclick="prePage()"></td> <!-- Botón "Rest Page" con clase nextpage y función onclick prePage() -->
+            <td><input type="button" value="Search" class="buscar" onclick="search()"></td> <!-- Botón "Search" con clase buscar y función onclick search() -->
+            <td><input type="button" class="listar" value="List" onclick="listSelected()"></td> <!-- Botón con valor "List", clase listar y función onclick listSelected() -->
+            
+            </tr>
+            
+            
+        </table>
+        <table>
+            <tr>
+                <!-- Columna izquierda -->
+                <td class="prueba" id="principal">
+                    <div id="divPrincipal">
+                        <h2 id="characters" clas="separador"></h2> <!-- Título de nivel 2 con id "characters" y clase "separador" -->
+                        <div id="containerCardsTable" class="container-cards-table"></div> <!-- Contenedor con id "containerCardsTable" y clase "container-cards-table" -->
+            
+                        <h2 id="episodes" clas="separador"></h2> <!-- Título de nivel 2 con id "episodes" y clase "separador" -->
+                        <div id="containerEpisodesCards" class="container-episodes-cards"></div> <!-- Contenedor con id "containerEpisodesCards" y clase "container-episodes-cards" -->
+            
+                        <h2 id="locations" clas="separador"></h2> <!-- Título de nivel 2 con id "locations" y clase "separador" -->
+                        <div id="containerLocationsCards" class="container-location-cards"></div> <!-- Contenedor con id "containerLocationsCards" y clase "container-location-cards" -->
+                    </div>
+                </td>
+                <!-- Columna derecha -->
+                <td class="prueba" id="anyadido"><div id="divAnyadido"></div></td>
+            </tr>  
+        </table>
+        
+
+
+        <h2 id="characters"></h2> <!-- Título de nivel 2 con id "characters" -->
+        <div id="containerCards" class="container-cards"></div> <!-- Contenedor con id "containerCards" y clase "container-cards" -->
+
+        <h2 id="characters"></h2> <!-- Título de nivel 2 con id "characters" -->
+        <div id="containerCards" class="container-cards"></div> <!-- Contenedor con id "containerCards" y clase "container-cards" -->
+
+        <h2 id="episodes"></h2> <!-- Título de nivel 2 con id "episodes" -->
+        <div id="containerEpisodesCardsOff" class="container-episodes-cards"></div> <!-- Contenedor con id "containerEpisodesCards" y clase "container-episodes-cards" -->
+
+        <h2 id="locations"></h2> <!-- Título de nivel 2 con id "locations" -->
+        <div id="containerLocationsCardsOut" class="container-location-cards"></div> <!-- Contenedor con id "containerLocationsCards" y clase "container-location-cards" -->
+
+        
+        </main>
+    </body>
+</html>

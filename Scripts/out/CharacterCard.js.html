@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: CharacterCard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: CharacterCard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Obtiene los datos de la API mediante una solicitud asíncrona.
+ * @param {string} url - La URL de la API.
+ * @returns {Promise&lt;Array>} - Una promesa que se resuelve con los resultados de la API.
+ */
+ const getApi = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.results;
+  }
+  
+  /**
+   * Crea una tarjeta de personaje.
+   * @param {Object} character - Los datos del personaje.
+   */
+  const createCards = (character) => {
+    document.getElementById("numPage").innerHTML = `${numPage}`;
+  
+    const card = document.createElement('div');
+    card.classList.add('card-character');
+  
+    const imgCard = document.createElement('img');
+    imgCard.src = character.image;
+    imgCard.alt = character.name;
+  
+    const containerDescription = document.createElement('div');
+    containerDescription.classList.add('description-card');
+  
+    const nameCharacter = document.createElement('h2');
+    nameCharacter.textContent = "Name: " + character.name;
+  
+    const statusCharacter = document.createElement('p');
+    statusCharacter.textContent = "Status: " + character.status;
+  
+    const speciesCharacter = document.createElement('p');
+    speciesCharacter.textContent = "Species: " + character.species;
+  
+    const genderCharacter = document.createElement('p');
+    genderCharacter.textContent = "Gender: " + character.gender;
+  
+    containerDescription.appendChild(nameCharacter);
+    containerDescription.appendChild(statusCharacter);
+    containerDescription.appendChild(speciesCharacter);
+    containerDescription.appendChild(genderCharacter);
+  
+    card.appendChild(imgCard);
+    card.appendChild(containerDescription);
+  
+    document.getElementById('containerCards').appendChild(card);
+  }
+  
+  /**
+   * Genera todos los personajes y los muestra en la página.
+   */
+  const generateAllCharacters = async () => {
+    const data = await getApi(URL + numPage);
+    data.map(character => createCards(character));
+  }
+  
+  window.addEventListener('DOMContentLoaded', generateAllCharacters);
+  
+  /**
+   * Genera los personajes que coincidan con la búsqueda y los muestra en la página.
+   */
+  const generateSearchCharacters = async () => {
+    const data = await getApi(URL + numPage);
+    data.map(character => createSearchCards(character, valoresBusqueda));
+  }
+  
+  /**
+   * Crea una tarjeta de personaje para la búsqueda.
+   * @param {Object} character - Los datos del personaje.
+   * @param {string} valoresBusqueda - El término de búsqueda.
+   */
+  const createSearchCards = (character, valoresBusqueda) => {
+    let nombres = character.name.split(" ");
+    document.getElementById("numPage").innerHTML = 1;
+  
+    if (character.name == valoresBusqueda || nombres.includes(valoresBusqueda) || Number(character.id) == Number(valoresBusqueda)) {
+      const card = document.createElement('div');
+      card.classList.add('card-character');
+  
+      const imgCard = document.createElement('img');
+      imgCard.src = character.image;
+      imgCard.alt = character.name;
+  
+      const containerDescription = document.createElement('div');
+      containerDescription.classList.add('description-card');
+
+      const nameCharacter = document.createElement('input');
+      nameCharacter.type="button";
+      nameCharacter.className="fakeh2";
+      nameCharacter.value=character.name;
+      nameCharacter.onclick = function(){
+          showInfo(character.url);
+      };
+
+      containerDescription.appendChild(nameCharacter);
+  
+      card.appendChild(imgCard);
+      card.appendChild(containerDescription);
+  
+      document.getElementById('containerCardsTable').appendChild(card);
+
+      //XML data
+      xml += '  &lt;character>\n';
+      xml += '    &lt;image>' + character.image + '&lt;/image>\n';
+      xml += '    &lt;name>' + character.name + '&lt;/name>\n';
+      xml += '    &lt;url>' + character.url + '&lt;/url>\n';
+      xml += '  &lt;/character>\n';
+    }
+  }
+  
+  /**
+   * Lista los personajes según el tipo seleccionado.
+   */
+  const listTypeCharacter = async () => {
+    const data = await getApi(URL + numPage);
+    data.map(character => createListedCharacters(character, valoresBusqueda));
+  }
+  
+  /**
+   * Crea una tarjeta de personaje para la lista según el tipo seleccionado.
+   * @param {Object} character - Los datos del personaje.
+   * @param {string} valoresBusqueda - El tipo seleccionado.
+   */
+  const createListedCharacters = (character, valoresBusqueda) => {
+    document.getElementById("numPage").innerHTML = 1;
+    
+    if (character.species == valoresBusqueda) {
+      const card = document.createElement('div');
+      card.classList.add('card-character');
+  
+      const imgCard = document.createElement('img');
+      imgCard.src = character.image;
+      imgCard.alt = character.name;
+  
+      const containerDescription = document.createElement('div');
+      containerDescription.classList.add('description-card');
+  
+      const nameCharacter = document.createElement('input');
+      nameCharacter.type="button";
+      nameCharacter.className="fakeh2";
+      nameCharacter.value=character.name;
+      nameCharacter.onclick = function(){
+          showInfoOnList(character.url);
+      };
+
+      const statusCharacter = document.createElement('p');
+      statusCharacter.textContent = "Status: " + character.status;
+  
+      const speciesCharacter = document.createElement('p');
+      speciesCharacter.textContent = "Species: " + character.species;
+  
+      const genderCharacter = document.createElement('p');
+      genderCharacter.textContent = "Gender: " + character.gender;
+  
+      containerDescription.appendChild(nameCharacter);
+      containerDescription.appendChild(statusCharacter);
+      containerDescription.appendChild(speciesCharacter);
+      containerDescription.appendChild(genderCharacter);
+  
+      card.appendChild(imgCard);
+      card.appendChild(containerDescription);
+  
+      document.getElementById('containerCards').appendChild(card);
+    }
+  }
+  
+     /**
+      * Saca la información del personaje al pulsar en el nombre.
+      * @param {string} url - Url del personaje.
+      */
+     function showInfo(url){
+      document.getElementById(`anyadido`).innerHTML="";
+      fetch(`${url}`)
+      .then(response => response.json())
+      .then(character => {
+          const breakLine=document.createElement(`br`);
+          const breakLine2=document.createElement(`br`);
+          const breakLine3=document.createElement(`br`);
+
+          const nameCharacter=document.createElement(`h2`);
+          nameCharacter.textContent=character.name;
+
+          const idCharacter=document.createElement(`p`);
+          idCharacter.classList.add(`tableContent`);
+          idCharacter.textContent=`Id: ${character.id}`;
+
+          const statusCharacter=document.createElement(`p`);
+          statusCharacter.classList.add(`tableContent`);
+          statusCharacter.textContent=`Status: ${character.status}`;
+
+          const speciesCharacter=document.createElement(`p`);
+          speciesCharacter.classList.add(`tableContent`);
+          speciesCharacter.textContent=`Specie: ${character.species}`;
+
+          const genderCharacter=document.createElement(`p`);
+          genderCharacter.classList.add(`tableContent`);
+          genderCharacter.textContent=`Gender: ${character.gender}`;
+
+          const origin=document.createElement(`h3`);
+          origin.classList.add(`selectorh3`);
+          origin.textContent=`Origin`;
+
+          const originCharacter=document.createElement(`p`);
+          originCharacter.classList.add(`tableContent`);
+          originCharacter.textContent=`Name: ${character.origin.name}`;
+
+          const location=document.createElement(`h3`);
+          location.classList.add(`selectorh3`);
+          location.textContent=`Location`;
+
+          const locationCharacter=document.createElement(`p`);
+          locationCharacter.classList.add(`tableContent`);
+          locationCharacter.textContent=`Name: ${character.location.name}`;
+
+          const createdChracter=document.createElement(`p`);
+          createdChracter.classList.add(`tableContent`);
+          createdChracter.textContent=`Created: ${character.created}`;
+
+          const episodeTitle=document.createElement(`h3`);
+          episodeTitle.classList.add(`selectorh3`);
+          episodeTitle.textContent=`Episodes`;
+
+          const infoTable=document.createElement(`div`);
+          infoTable.classList.add(`resultadoTabla`);
+          infoTable.appendChild(nameCharacter);
+          infoTable.appendChild(idCharacter);
+          infoTable.appendChild(createdChracter);
+          infoTable.appendChild(statusCharacter);
+          infoTable.appendChild(speciesCharacter);
+          infoTable.appendChild(genderCharacter);
+          infoTable.appendChild(breakLine);
+          infoTable.appendChild(origin);
+          infoTable.appendChild(originCharacter);
+          infoTable.appendChild(breakLine2);
+          infoTable.appendChild(location);
+          infoTable.appendChild(locationCharacter);
+          infoTable.appendChild(breakLine3);
+          infoTable.appendChild(episodeTitle);
+
+          for(let i=0;i&lt;character.episode.length;i++){
+              fetch(`${character.episode[i]}`)
+              .then(response => response.json())
+              .then(episode => {
+                  let episodename=document.createElement(`p`);
+                  episodename.classList.add(`tableContent`);
+                  episodename.textContent=`${episode.name}`;
+                  infoTable.appendChild(episodename);
+              });
+          }            
+
+          document.getElementById(`anyadido`).appendChild(infoTable);
+      });
+  }
+
+      /**
+       * Saca la información del personaje cuando pulsemos sobre el nombre en un listado.
+       * @param {string} url - Url del personaje.
+       */
+      function showInfoOnList(url){
+        limpiar();
+        
+        fetch(`${url}`)
+        .then(response => response.json())
+        .then(character => {
+            valoresBusqueda=character.name;
+
+            searchBeforeList();
+
+            const breakLine=document.createElement(`br`);
+            const breakLine2=document.createElement(`br`);
+            const breakLine3=document.createElement(`br`);
+
+            const nameCharacter=document.createElement(`h2`);
+            nameCharacter.textContent=character.name;
+
+            const idCharacter=document.createElement(`p`);
+            idCharacter.classList.add(`tableContent`);
+            idCharacter.textContent=`Id: ${character.id}`;
+
+            const statusCharacter=document.createElement(`p`);
+            statusCharacter.classList.add(`tableContent`);
+            statusCharacter.textContent=`Status: ${character.status}`;
+
+            const speciesCharacter=document.createElement(`p`);
+            speciesCharacter.classList.add(`tableContent`);
+            speciesCharacter.textContent=`Specie: ${character.species}`;
+
+            const genderCharacter=document.createElement(`p`);
+            genderCharacter.classList.add(`tableContent`);
+            genderCharacter.textContent=`Gender: ${character.gender}`;
+
+            const origin=document.createElement(`h3`);
+            origin.classList.add(`selectorh3`);
+            origin.textContent=`Origin`;
+
+            const originCharacter=document.createElement(`p`);
+            originCharacter.classList.add(`tableContent`);
+            originCharacter.textContent=`Name: ${character.origin.name}`;
+
+            const location=document.createElement(`h3`);
+            location.classList.add(`selectorh3`);
+            location.textContent=`Location`;
+
+            const locationCharacter=document.createElement(`p`);
+            locationCharacter.classList.add(`tableContent`);
+            locationCharacter.textContent=`Name: ${character.location.name}`;
+
+            const createdChracter=document.createElement(`p`);
+            createdChracter.classList.add(`tableContent`);
+            createdChracter.textContent=`Created: ${character.created}`;
+
+            const episodeTitle=document.createElement(`h3`);
+            episodeTitle.classList.add(`selectorh3`);
+            episodeTitle.textContent=`Episodes`;
+
+            const infoTable=document.createElement(`div`);
+            infoTable.appendChild(nameCharacter);
+            infoTable.appendChild(idCharacter);
+            infoTable.appendChild(createdChracter);
+            infoTable.appendChild(statusCharacter);
+            infoTable.appendChild(speciesCharacter);
+            infoTable.appendChild(genderCharacter);
+            infoTable.appendChild(breakLine);
+            infoTable.appendChild(origin);
+            infoTable.appendChild(originCharacter);
+            infoTable.appendChild(breakLine2);
+            infoTable.appendChild(location);
+            infoTable.appendChild(locationCharacter);
+            infoTable.appendChild(breakLine3);
+            infoTable.appendChild(episodeTitle);
+
+            for(let i=0;i&lt;character.episode.length;i++){
+                fetch(`${character.episode[i]}`)
+                .then(response => response.json())
+                .then(episode => {
+                    let episodename=document.createElement(`p`);
+                    episodename.classList.add(`tableContent`);
+                    episodename.textContent=`${episode.name}`;
+                    infoTable.appendChild(episodename);
+                });
+            }            
+
+            document.getElementById(`anyadido`).appendChild(infoTable);
+        });
+    }</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#URL">URL</a></li><li><a href="global.html#URL2">URL2</a></li><li><a href="global.html#URL3">URL3</a></li><li><a href="global.html#createCards">createCards</a></li><li><a href="global.html#createEpisodes">createEpisodes</a></li><li><a href="global.html#createListedCharacters">createListedCharacters</a></li><li><a href="global.html#createListedEpisodes">createListedEpisodes</a></li><li><a href="global.html#createListedLocations">createListedLocations</a></li><li><a href="global.html#createLocations">createLocations</a></li><li><a href="global.html#createSearchCards">createSearchCards</a></li><li><a href="global.html#displayImportedData">displayImportedData</a></li><li><a href="global.html#executeExport">executeExport</a></li><li><a href="global.html#exportXML">exportXML</a></li><li><a href="global.html#generateAllCharacters">generateAllCharacters</a></li><li><a href="global.html#generateListedEpisodes">generateListedEpisodes</a></li><li><a href="global.html#generateListedLocations">generateListedLocations</a></li><li><a href="global.html#generateSearchCharacters">generateSearchCharacters</a></li><li><a href="global.html#generateSearchEpisodes">generateSearchEpisodes</a></li><li><a href="global.html#generateSearchLocations">generateSearchLocations</a></li><li><a href="global.html#getApi">getApi</a></li><li><a href="global.html#importXML">importXML</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#listSelected">listSelected</a></li><li><a href="global.html#listTypeCharacter">listTypeCharacter</a></li><li><a href="global.html#nextPage">nextPage</a></li><li><a href="global.html#numPage">numPage</a></li><li><a href="global.html#prePage">prePage</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#searchBeforeList">searchBeforeList</a></li><li><a href="global.html#showEpisodeInfo">showEpisodeInfo</a></li><li><a href="global.html#showEpisodeListedInfo">showEpisodeListedInfo</a></li><li><a href="global.html#showInfo">showInfo</a></li><li><a href="global.html#showInfoOnList">showInfoOnList</a></li><li><a href="global.html#showListedLocationInfo">showListedLocationInfo</a></li><li><a href="global.html#showLocationInfo">showLocationInfo</a></li><li><a href="global.html#valoresBusqueda">valoresBusqueda</a></li><li><a href="global.html#xml">xml</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jun 04 2023 20:20:43 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

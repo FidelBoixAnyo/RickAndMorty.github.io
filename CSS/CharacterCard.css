@@ -1,0 +1,112 @@
+ /*Cartas para personajes */
+    .finder-character {
+        width: 30rem;/* Ancho de la carta del personaje */
+        height: 1rem;/* Altura de la carta del personaje */
+        font-size: 1.5rem;/* Tamaño de fuente de la carta del personaje */
+        border-radius: 20px;/* Radio de borde para la carta del personaje */
+        border: 2px black solid;/* Borde sólido de 2px en color negro para la carta del personaje */
+        background-color: azure;/* Color de fondo para la carta del personaje */
+        padding: 1rem;/* Relleno interno de la carta del personaje */
+        font-family: 'Delicious Handrawn', cursive;/* Fuente de la carta del personaje */
+        margin-left: 10px;
+    }
+
+    .container-cards {
+        width: 100%;/* Ancho del contenedor de cartas */
+        height: auto;/* Altura automática del contenedor de cartas */
+        display: flex;/* Uso de flexbox para el diseño del contenedor de cartas */
+        justify-content: center;/* Centrar horizontalmente los elementos dentro del contenedor */
+        align-items: center;/* Centrar verticalmente los elementos dentro del contenedor */
+        flex-wrap: wrap;/* Permitir el ajuste de envoltura de los elementos hijos dentro del contenedor */
+    }
+
+    .card-character {
+        width: 30%;/* Ancho de la carta de personaje */
+        height: 5%;/* Altura de la carta de personaje */
+        border: groove 5px gray;/* Borde estilizado de 5px en color gris para la carta de personaje */
+        margin: 1rem;/* Margen alrededor de la carta de personaje */
+        display: flex;/* Uso de flexbox para el diseño de la carta de personaje */
+    }
+    
+    .card-character > img {
+        width: 50%;/* Ancho de la imagen dentro de la carta de personaje */
+        height: 100%;/* Altura de la imagen dentro de la carta de personaje */
+    }
+    
+
+    .card-character > .description-card {
+        width: 50%;/* Ancho del contenedor de descripción dentro de la carta de personaje */
+        height: 100%;/* Altura del contenedor de descripción dentro de la carta de personaje */
+        display: flex;/* Uso de flexbox para el diseño del contenedor de descripción */
+        flex-direction: column;/* Dirección de columna para los elementos dentro del contenedor de descripción */
+        align-items: auto;/* Centrar verticalmente los elementos dentro del contenedor de descripción */
+     
+    }
+
+    
+
+    .description-card > p {
+        font-size: 1.10rem;/* Tamaño de fuente para el párrafo dentro del contenedor de descripción */
+        text-align: left;/* Alinear el texto a la izquierda */
+        font-family: 'Courier New', Courier, monospace;/* Fuente para el párrafo dentro del contenedor de descripción */
+        margin-top: 10px;/* Margen superior para el párrafo dentro del contenedor de descripción */
+    }
+
+    /*Lo siguiente hace referencia al h2 Characters: */
+    h2#characters {
+        margin-right: 5px;/* ampliar el espacio de la derecha*/
+        font-family: 'Delicious Handrawn', cursive;/* Fuente para el título con ID "characters" */
+        margin-top: 10px;/* Fuente para el título con ID "characters" */
+        color: black; /* Cambiar #FF0000 por el color deseado */
+        font-size: 3rem;/* Tamaño de fuente para el título con ID "characters" */
+        /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);*//*gris*/
+        text-shadow: 2px 2px 4px rgba(139, 250, 4, 0.5);/* Sombra de texto para el título con ID "characters" */
+    }
+
+    /*Cartas para personajes para tabla */
+    .container-cards-table {
+        width: 120%;/* Ancho del contenedor de cartas para tabla */
+        height: 200%;/* Altura del contenedor de cartas para tabla */
+        display: flex;/* Uso de flexbox para el diseño del contenedor de cartas para tabla */
+        justify-content: center;/* Centrar horizontalmente los elementos dentro del contenedor */
+        align-items: center;/* Centrar verticalmente los elementos dentro del contenedor */
+        flex-wrap: wrap;/* Permitir el ajuste de envoltura de los elementos hijos dentro del contenedor */
+        margin-right: 400px;/* Margen derecho del contenedor de cartas para tabla */
+        margin-left: -70px;/* Margen izquierdo del contenedor de cartas para tabla */
+    }
+
+    .container-cards-table img {
+        width: 30%;/* Ancho de la imagen dentro del contenedor de cartas para tabla */
+        height: 30%;/* Altura de la imagen dentro del contenedor de cartas para tabla */ 
+    }
+      
+    .container-cards-table h2 {
+        text-align: center;/* Alinear el texto al centro */
+        font-family: 'Delicious Handrawn';/* Fuente para el título dentro del contenedor de cartas para tabla */
+        margin-top: 10px;/* Margen superior para el título dentro del contenedor de cartas para tabla */
+    }
+
+    .container-cards-table p {
+        display: none;/* Ocultar los párrafos dentro del contenedor de cartas para tabla */
+    }
+
+
+    td#anyadido.prueba{
+        vertical-align: top;
+        margin-top: 100px;
+    }
+    /*selectorh3 --> es el h3  que hace referencia a Origin, Location, Episodes*/
+    h3.selectorh3{
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /*tableContent --> es la p que hace referencia a todo el texto*/
+    p.tableContent{
+        text-align: center;
+        margin-top: 10px;
+    }
+
+   
+
+    

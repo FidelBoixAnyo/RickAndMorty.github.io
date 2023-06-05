@@ -1,0 +1,234 @@
+    @import url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap');
+
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el cuerpo del documento */
+body {
+    width: 100vw; /* Ancho igual al ancho de la ventana */
+    height: auto; /* Altura automática */
+    display: flex; /* Uso de flexbox para el diseño del cuerpo */
+    flex-direction: column; /* Orientación de columna para los elementos hijos */
+    align-items: center; /* Centrar verticalmente los elementos dentro del cuerpo */
+
+    /* Para cambiar el color de fondo cuando se refresca la pantalla */
+    background-color: #000000; /* Color de fondo inicial */
+    transition: background-color 0.5s ease; /* Transición suave al cambiar el color de fondo */
+}
+
+/* Estilos para los títulos h1 */
+h1 {
+    font-size: 5rem; /* Tamaño de fuente para los títulos h1 */
+    text-shadow: 0 0 15px #ffff00; /* Sombra de texto para los títulos h1 */
+    color: #00ffff; /* Color de texto para los títulos h1 */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para los títulos h1 */
+    animation: title 2s infinite; /* Animación para los títulos h1 */
+}
+
+@keyframes title {
+    50% {
+        text-shadow: 0 0 15px #00ffff; /* Sombra de texto para los títulos h1 en el punto medio de la animación */
+        color: #ffff00; /* Color de texto para los títulos h1 en el punto medio de la animación */
+    }
+}
+
+/* Estilos para el contenedor principal */
+main {
+    margin-top: 1rem; /* Margen superior para el contenedor principal */
+    width: 100%; /* Ancho del contenedor principal */
+    height: auto; /* Altura automática */
+    display: flex; /* Uso de flexbox para el diseño del contenedor principal */
+    flex-direction: column; /* Orientación de columna para los elementos hijos */
+    align-items: center; /* Centrar verticalmente los elementos dentro del contenedor principal */
+}
+
+/* Estilos para el elemento select */
+select {
+    margin-right: 1000px; /* Margen derecho del elemento select */
+    width: 8rem; /* Ancho del elemento select */
+    height: 4rem; /* Altura del elemento select */
+    font-size: 1.5rem; /* Tamaño de fuente para el elemento select */
+    border-radius: 20px; /* Radio de borde para el elemento select */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento select */
+    background-color: azure; /* Color de fondo para el elemento select */
+    padding: 1rem; /* Espaciado interno para el elemento select */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento select */
+}
+
+/* Estilos para el elemento input con clase buscar */
+input.buscar {
+    margin-left: -40px; /* Margen izquierdo del elemento input con clase buscar */
+    width: 7rem; /* Ancho del elemento input con clase buscar */
+    height: 3.5rem; /* Altura del elemento input con clase buscar */
+    font-size:1.5rem; /* Tamaño de fuente para el elemento input con clase buscar */
+    border-radius: 20px; /* Radio de borde para el elemento input con clase buscar */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento input con clase buscar */
+    background-color: azure; /* Color de fondo para el elemento input con clase buscar */
+    padding: 1rem; /* Espaciado interno para el elemento input con clase buscar */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento input con clase buscar */
+}
+
+/* Estilos para el elemento input con clase listar */
+input.listar {
+    margin-left: 10px; /* Margen izquierdo del elemento input con clase listar */
+    width: 7rem; /* Ancho del elemento input con clase listar */
+    height: 3.5rem; /* Altura del elemento input con clase listar */
+    font-size: 1.5rem; /* Tamaño de fuente para el elemento input con clase listar */
+    border-radius: 20px; /* Radio de borde para el elemento input con clase listar */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento input con clase listar */
+    background-color: azure; /* Color de fondo para el elemento input con clase listar */
+    padding: 1rem; /* Espaciado interno para el elemento input con clase listar */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento input con clase listar */
+}
+
+/* Estilos para el elemento input con clase nextpage */
+input.nextpage {
+    margin-left: -600px; /* Margen izquierdo del elemento input con clase nextpage */
+    width: 7rem; /* Ancho del elemento input con clase nextpage */
+    height: 3.5rem; /* Altura del elemento input con clase nextpage */
+    font-size: 1.5rem; /* Tamaño de fuente para el elemento input con clase nextpage */
+    border-radius: 20px; /* Radio de borde para el elemento input con clase nextpage */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento input con clase nextpage */
+    background-color: azure; /* Color de fondo para el elemento input con clase nextpage */
+    padding: 1rem; /* Espaciado interno para el elemento input con clase nextpage */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento input con clase nextpage */
+    transform: rotate(-10deg); /* Rotación de -10 grados para el elemento input con clase nextpage */
+}
+
+/* Estilos para el elemento input con clase restpage */
+input.restpage {
+    margin-left: -450px; /* Margen izquierdo del elemento input con clase restpage */
+    width: 7rem; /* Ancho del elemento input con clase restpage */
+    height: 3.5rem; /* Altura del elemento input con clase restpage */
+    font-size: 1.5em; /* Tamaño de fuente para el elemento input con clase restpage */
+    border-radius: 20px; /* Radio de borde para el elemento input con clase restpage */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento input con clase restpage */
+    background-color: azure; /* Color de fondo para el elemento input con clase restpage */
+    padding: 1rem; /* Espaciado interno para el elemento input con clase restpage */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento input con clase restpage */
+    transform: rotate(10deg); /* Rotación de 10 grados para el elemento input con clase restpage */
+}
+
+table {
+    align-items: center; /* Centra los elementos de la tabla horizontalmente */
+}
+
+h2:hover {
+    color: #ffff00; /* Cambia el color del texto del elemento h2 al hacer hover */
+}
+
+/* Estilos para el elemento con id numPage */
+#numPage {
+    font-size: 22px; /* Tamaño de fuente para el elemento con id numPage */
+    font-weight: bold; /* Grosor de fuente para el elemento con id numPage */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento con id numPage */
+    border-radius: 20px; /* Radio de borde para el elemento con id numPage */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento con id numPage */
+    width: 2rem; /* Ancho del elemento con id numPage */
+    height: 2rem; /* Altura del elemento con id numPage */
+    display: flex; /* Establece el elemento con id numPage como un contenedor flexible */
+    justify-content: center; /* Centra horizontalmente el contenido del elemento con id numPage */
+    align-items: center; /* Centra verticalmente el contenido del elemento con id numPage */
+}
+
+/* Estilos para el elemento label con clase txt */
+label.txt {
+    color: black; /* Color de texto para el elemento label con clase txt */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento label con clase txt */
+    font-size: 1.5rem; /* Tamaño de fuente para el elemento label con clase txt */
+}
+
+.prueba {
+    border-collapse: collapse; /* Colapsa los bordes de la tabla */
+    border: 1px black solid; /* Borde sólido de 1px en color negro para el elemento con clase prueba */
+    width: 7%; /* Ancho del elemento con clase prueba */
+    height: 7%; /* Altura del elemento con clase prueba */
+}
+
+/* Estilos para la columna izquierda de la tabla */
+td#principal {
+    margin-right: -100px; /* Centra horizontalmente el contenido de la columna izquierda */
+    width:50%; /* Ancho de la columna izquierda */
+    border:0px; /* Borde de 0px para la columna izquierda */
+}
+
+/* Estilos para la columna derecha de la tabla */
+td#anyadido {
+    margin:auto; /* Centra horizontalmente el contenido de la columna derecha */
+    width:50%; /* Ancho de la columna derecha */
+    border:0px; /* Borde de 0px para la columna derecha */
+}
+
+/* Estilos para crear un espacio entre la tabla y los botones */
+select, input.buscar, input.listar, input.nextpage, input.restpage {
+    margin-bottom: 1rem; /* Margen inferior de 1rem para los elementos select, input con clase buscar/listar/nextpage/restpage */
+}
+
+
+
+/*lo siguiente es para que el boton fakeh2 no tenga fondo ni borde pero siga funcionando como botón*/
+input.fakeh2{
+    background: none;
+    border: none;
+    text-align: auto;
+    font-family: 'Delicious Handrawn';
+    margin-top: 10px;
+    font-size: 100%;
+}
+
+/*lo siguiente es para que cuando pases el ratón por encima se ponga de color amarillo*/
+input.fakeh2:hover {
+    color: #ffff00; /* Cambia el color del texto del elemento h2 al hacer hover */
+}
+
+.XML{
+    margin-left: -40px; /* Margen izquierdo del elemento input con clase buscar */
+    width: 7rem; /* Ancho del elemento input con clase buscar */
+    height: 3.5rem; /* Altura del elemento input con clase buscar */
+    font-size:1.5rem; /* Tamaño de fuente para el elemento input con clase buscar */
+    border-radius: 20px; /* Radio de borde para el elemento input con clase buscar */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento input con clase buscar */
+    background-color: azure; /* Color de fondo para el elemento input con clase buscar */
+    padding: 1rem; /* Espaciado interno para el elemento input con clase buscar */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento input con clase buscar */
+}
+
+
+input.XMLE{
+    margin-left: 170px; /* Margen izquierdo del elemento input con clase buscar */
+    width: 7rem; /* Ancho del elemento input con clase buscar */
+    height: 3.5rem; /* Altura del elemento input con clase buscar */
+    font-size:1.5rem; /* Tamaño de fuente para el elemento input con clase buscar */
+    border-radius: 20px; /* Radio de borde para el elemento input con clase buscar */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento input con clase buscar */
+    background-color: azure; /* Color de fondo para el elemento input con clase buscar */
+    padding: 1rem; /* Espaciado interno para el elemento input con clase buscar */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento input con clase buscar */
+}
+
+input.XMLIF{
+    margin-left: 15px; /* Margen izquierdo del elemento input con clase buscar */
+    width: 7rem; /* Ancho del elemento input con clase buscar */
+    height: 3.5rem; /* Altura del elemento input con clase buscar */
+    font-size:1.5rem; /* Tamaño de fuente para el elemento input con clase buscar */
+    /*border-radius: 20px; /* Radio de borde para el elemento input con clase buscar */
+    /*border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento input con clase buscar */
+    /*background-color: azure; /* Color de fondo para el elemento input con clase buscar */
+    padding: 1rem; /* Espaciado interno para el elemento input con clase buscar */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento input con clase buscar */
+}
+
+input.XMLI{
+    margin-left: 20px; /* Margen izquierdo del elemento input con clase buscar */
+    width: 7rem; /* Ancho del elemento input con clase buscar */
+    height: 3.5rem; /* Altura del elemento input con clase buscar */
+    font-size:1.5rem; /* Tamaño de fuente para el elemento input con clase buscar */
+    border-radius: 20px; /* Radio de borde para el elemento input con clase buscar */
+    border: 2px black solid; /* Borde sólido de 2px en color negro para el elemento input con clase buscar */
+    background-color: azure; /* Color de fondo para el elemento input con clase buscar */
+    padding: 1rem; /* Espaciado interno para el elemento input con clase buscar */
+    font-family: 'Delicious Handrawn', cursive; /* Fuente para el elemento input con clase buscar */
+}
